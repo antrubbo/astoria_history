@@ -3,25 +3,42 @@ import './App.css';
 import {createStore} from 'redux'
 
 const initialState = {
-  message: "Hello World!"
+  message: "Hello World!",
+  isClicked: true
 }
 
 function reducer(state=initialState, action){
-  if(action.type === "sayHello"){
-    // return `${state.message} is what the store is returning from the dispatch`
-    return state.message.split('').reverse().join('').toLowerCase()
+  // if(action.type === "sayHello"){
+  //   // return `${state.message} is what the store is returning from the dispatch`
+  //   let word = state.message
+  //   return {
+  //     ...state, 
+  //     message: word.split('').reverse().join('').toLowerCase()
+  //   }
+  if(action.type === "clicked"){
+    let word = state.message
+      return{
+        ...state,
+        message: word.split('').reverse().join('').toLowerCase(),
+        isClicked: !state.isClicked
+    }
   }
 }
 
 const store = createStore(reducer)
+
+store.subscribe(() => {
+  const state = store.getState()
+  console.log(state.message, state.isClicked)
+})
 
 // --------------------------------------------------------------------------------------------------
 
 function App() {
 
   function handleClick() {
-    store.dispatch({type: "sayHello"})
-    console.log(store.getState())
+      store.dispatch({type: "clicked"})
+    // store.dispatch({type: "sayHello"}
   }
 
   return (
@@ -29,7 +46,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p onClick={handleClick}>
-          Edit <code>src/App.js</code> and save to reload.
+          Edit <code>src/App.js</code> and {initialState.isClicked ? "don't do shit" : 'save to reload'}.
         </p>
         <a
           className="App-link"
