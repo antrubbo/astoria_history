@@ -11,7 +11,7 @@ const consoleSlice = createSlice({
             console.log(state.message.split('').reverse().join('').toLowerCase(), state.message)
         },
         increaseCount: (state, action)=> {
-            state.count += 1
+            state.count += action.payload
         }
     }
 })

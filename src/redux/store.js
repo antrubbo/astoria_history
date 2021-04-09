@@ -1,10 +1,10 @@
 import {configureStore} from "@reduxjs/toolkit"
-import consoleSlice from "./consoleSlice"
+import consoleReducer from "./consoleSlice"
 
 const store = configureStore({
     reducer: {
-      words: consoleSlice,
-      count: consoleSlice
+      words: consoleReducer,
+      count: consoleReducer
     }
 })
 
