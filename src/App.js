@@ -1,44 +1,60 @@
 import logo from './logo.svg';
 import './App.css';
-import {createStore} from 'redux'
+// import {createStore} from 'redux'
+// import {createSlice} from '@reduxjs/toolkit'
 
-const initialState = {
-  message: "Hello World!",
-  isClicked: true
-}
+// const initialState = {
+//   message: "Hello World!",
+//   isClicked: true
+// }
 
-function reducer(state=initialState, action){
-  // if(action.type === "sayHello"){
-  //   // return `${state.message} is what the store is returning from the dispatch`
-  //   let word = state.message
-  //   return {
-  //     ...state, 
-  //     message: word.split('').reverse().join('').toLowerCase()
-  //   }
-  if(action.type === "clicked"){
-    let word = state.message
-      return{
-        ...state,
-        message: word.split('').reverse().join('').toLowerCase(),
-        isClicked: !state.isClicked
-    }
-  }
-}
+// function reducer(state=initialState, action){
+//   if(action.type === "clicked"){
+//     let word = state.message
+//       return{
+//         ...state,
+//         message: word.split('').reverse().join('').toLowerCase(),
+//         isClicked: !state.isClicked
+//     }
+//   }
+// }
 
-const store = createStore(reducer)
+// console.log(initialState.message)
 
-store.subscribe(() => {
-  const state = store.getState()
-  console.log(state.message, state.isClicked)
-})
+// const slice = createSlice({
+//   name: "firstSlice",
+//   initialState: initialState,
+//   reducers: {
+//     consoleLogState(state, action) {
+//         console.log(state.message.split('').reverse().join('').toLowerCase(), initialState.message, !state.isClicked)
+//     }
+//   }
+// })
+
+// const reducer = slice.reducer
+
+// const actions = slice.actions
+// const {consoleLogState} = slice.actions
+// console.log(consoleLogState())
+
+// single source of truth: where state lives
+// from 'redux'
+// const store = createStore(reducer)
+
+// re-render when state changes: subscribe 
+// subscribe() not really used with React
+// store.subscribe(() => {
+//   const state = store.getState()
+//   console.log(state.message, state.isClicked)
+// })
 
 // --------------------------------------------------------------------------------------------------
 
 function App() {
 
+  // update state: dispatch
   function handleClick() {
-      store.dispatch({type: "clicked"})
-    // store.dispatch({type: "sayHello"}
+      store.dispatch(consoleLogState())
   }
 
   return (
