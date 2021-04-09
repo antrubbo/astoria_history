@@ -3,9 +3,21 @@ import {createSlice} from "@reduxjs/toolkit"
 const consoleSlice = createSlice({
     name: "words",
     initialState: {
-        message: "Hello World!"
+        message: "Hello World!",
+        count: 0
     },
-    reducers:{}
+    reducers:{
+        consoleLogState: (state, action) => {
+            console.log(state.message.split('').reverse().join('').toLowerCase(), state.message)
+        },
+        increaseCount: (state, action)=> {
+            state.count += 1
+        }
+    }
 })
 
+// actions
+export const {increaseCount, consoleLogState} = consoleSlice.actions
+
+// reducer
 export default consoleSlice.reducer 

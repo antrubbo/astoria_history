@@ -3,7 +3,8 @@ import consoleSlice from "./consoleSlice"
 
 const store = configureStore({
     reducer: {
-        wordsToConsole:
+      words: consoleSlice,
+      count: consoleSlice
     }
 })
 

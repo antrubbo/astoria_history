@@ -1,5 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
+import {useSelector, useDispatch} from "react-redux"
+import {increaseCount, consoleLogState} from './redux/consoleSlice'
 // import {createStore} from 'redux'
 // import {createSlice} from '@reduxjs/toolkit'
 
@@ -25,9 +27,9 @@ import './App.css';
 //   name: "firstSlice",
 //   initialState: initialState,
 //   reducers: {
-//     consoleLogState(state, action) {
-//         console.log(state.message.split('').reverse().join('').toLowerCase(), initialState.message, !state.isClicked)
-//     }
+    // consoleLogState(state, action) {
+    //     console.log(state.message.split('').reverse().join('').toLowerCase(), initialState.message, !state.isClicked)
+    // }
 //   }
 // })
 
@@ -51,10 +53,20 @@ import './App.css';
 // --------------------------------------------------------------------------------------------------
 
 function App() {
+  // when you want to access pieces of state(get data out of the store), use useSelector()
+  const consoleState = useSelector(state => state.words.message)
+  const countState = useSelector(state => state.count.count)
+  console.log(countState)
 
-  // update state: dispatch
+  // type this in to change state and have access to dispatch
+  const dispatch = useDispatch()
+
   function handleClick() {
-      store.dispatch(consoleLogState())
+    dispatch(consoleLogState())
+  }
+
+  function handleCount() {
+    dispatch(increaseCount())
   }
 
   return (
@@ -62,7 +74,10 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p onClick={handleClick}>
-          Edit <code>src/App.js</code> and {initialState.isClicked ? "don't do shit" : 'save to reload'}.
+          Edit <code>src/App.js</code> and {consoleState}
+        </p>
+        <p onClick={handleCount}>
+          Here is the count: {countState}
         </p>
         <a
           className="App-link"
